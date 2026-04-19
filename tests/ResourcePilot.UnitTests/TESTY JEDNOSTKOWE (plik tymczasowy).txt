@@ -1,0 +1,4 @@
+reservation conflicts
+status validation
+ticket rules
+logical decisions & permissions

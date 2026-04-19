@@ -1,0 +1,12 @@
+Przykladowa zawartosc:
+BaseEntity
+AuditableEntity
+User
+Resource
+Reservation
+SupportTicket
+TicketComment
+ReservationStatus
+TicketStatus
+IR reservationRepository
+IR reservationConflictPolicy
