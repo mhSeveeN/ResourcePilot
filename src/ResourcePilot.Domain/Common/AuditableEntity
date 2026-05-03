@@ -1,0 +1,13 @@
+using System;
+
+namespace ResourcePilot.Domain.Common
+{
+    public abstract class AuditableEntity : BaseEntity
+    {
+        public DateTimeOffset CreatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt { get; set; }
+        public bool isDeleted { get; set; }
+    }
+}
+
+// Wspólna baza encji, która zawiera właściwości audytu, takie jak CreatedAt, UpdatedAt i isDeleted. Wszystkie encje dziedziczące po AuditableEntity będą miały te właściwości, co ułatwia zarządzanie danymi i śledzenie zmian w bazie danych. 
