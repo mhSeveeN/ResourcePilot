@@ -1,0 +1,2 @@
+npm install --> instalacja
+npm run dev --> włączenie podglądu
