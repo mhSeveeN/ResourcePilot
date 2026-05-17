@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --black: #080706;
+  --ivory: #F8F4EC;
+  --gold: #C5A059;
+  --gold-light: #D4B47A;
+  --gold-dim: rgba(197, 160, 89, 0.18);
+  --glass: rgba(248, 244, 236, 0.055);
+  --glass-border: rgba(197, 160, 89, 0.22);
+  --text-muted: rgba(248, 244, 236, 0.6);
+  --text-dim: rgba(248, 244, 236, 0.38);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable both-edges;
+  overflow-y: scroll;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--ivory);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  min-height: 100%;
+}
+
+#root {
+  min-height: 100svh;
+  width: 100%;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+  color: var(--ivory);
+}
+
+p { margin: 0; }
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* Gold separator line */
+.gold-separator {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+/* Date/time input calendar icon color fix */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7) sepia(1) saturate(2) hue-rotate(5deg);
+  cursor: pointer;
+}
+
+/* Number input arrows hide */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+/* Select option dark bg */
+option {
+  background: #111;
+  color: var(--ivory);
+}
