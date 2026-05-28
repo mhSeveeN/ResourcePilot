@@ -91,13 +91,13 @@ namespace RestaurantReservationAPI.Controllers
             var reservationDuration = TimeSpan.FromHours(2);
 
             var requestedStart = date;
-            var requestedEnd   = date + reservationDuration;
+            var requestedEnd = date + reservationDuration;
 
             var occupiedTableNumbers_List = reservations_List
                 .Where(r =>
                 {
                     var existingStart = r.ReservationDate_Model;
-                    var existingEnd   = r.ReservationDate_Model + reservationDuration;
+                    var existingEnd = r.ReservationDate_Model + reservationDuration;
 
                     // Przedziały zachodzą na siebie gdy NIE jest tak,
                     // że jeden kończy się zanim drugi się zaczyna
