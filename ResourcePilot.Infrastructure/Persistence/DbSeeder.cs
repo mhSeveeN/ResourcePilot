@@ -1,9 +1,12 @@
+// Class responsible for inserting db with start data.
+// It starts automatically when app starts if db is empty
 using ResourcePilot.Domain.Entities;
 
 namespace ResourcePilot.Infrastructure.Persistence;
 
 public static class DbSeeder
 {
+    // Method for checking if db contains tables - if not adding them.
     public static void Seed(ResourcePilotDbContext context)
     {
         if (context.Tables.Any()) return; // DB has been seeded

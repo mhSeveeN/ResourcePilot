@@ -1,3 +1,4 @@
+// Model representing table reservation containing every data needed
 using ResourcePilot.Domain.Enums;
 
 namespace ResourcePilot.Domain.Entities;
