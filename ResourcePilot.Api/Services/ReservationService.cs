@@ -1,3 +1,6 @@
+// Implementation of reservation service for managing restaurant reservations, including availability checks, CRUD operations, and status updates.
+// Separated from controllers for better maintainability and testability. Uses Entity Framework Core for data access and includes business logic for reservation rules.
+
 using Microsoft.EntityFrameworkCore;
 using ResourcePilot.Application.Common.DTOs;
 using ResourcePilot.Application.Common.Interfaces;

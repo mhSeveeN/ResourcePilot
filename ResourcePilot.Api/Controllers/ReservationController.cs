@@ -1,3 +1,6 @@
+// Controller for handling reservation-related API endpoints, such as creating, updating, retrieving, and canceling reservations.
+// Accepts requests from http and interacts with the IReservationService to perform the necessary operations.
+
 using Microsoft.AspNetCore.Mvc;
 using ResourcePilot.Application.Common.DTOs;
 using ResourcePilot.Application.Common.Interfaces;
