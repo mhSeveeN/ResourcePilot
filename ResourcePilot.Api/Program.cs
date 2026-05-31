@@ -28,7 +28,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactApp", policy =>
     {
-        policy.WithOrigins("http://localhost:5173", "https://localhost:3000")
+        policy.WithOrigins("http://localhost:5173", "https://localhost:5173", "https://localhost:3000")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
     });
@@ -60,7 +60,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("ReactApp");
 // HTTP => HTTPS (for safety)
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 

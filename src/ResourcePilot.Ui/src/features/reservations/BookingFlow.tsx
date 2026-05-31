@@ -58,14 +58,14 @@ export function BookingFlow({
 
   // Load availability when date or partySize changes
   useEffect(() => {
-    if (!date) return
+    if (!date || !time) return
     setLoadingAvail(true)
     setSelectedTableId(null)
     reservationService.getAvailability(date, partySize).then((avail) => {
       setAvailability(avail)
       setLoadingAvail(false)
     })
-  }, [date, partySize])
+  }, [date, time, partySize])
 
   const selectedTable = useMemo(
     () => floorTables.find((t) => t.id === selectedTableId),

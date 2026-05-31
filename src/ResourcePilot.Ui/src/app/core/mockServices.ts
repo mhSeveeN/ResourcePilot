@@ -10,6 +10,8 @@
  *   - Replace the body of each function with an `axios` / `fetch` call.
  */
 
+
+import { reservationApiService } from '../../shared/reservationApi'
 import { floorTables, ADMIN_EMAIL } from './constants'
 import type {
   AdminSession,
@@ -166,97 +168,7 @@ ensureSeed()
 
 // ─── Reservation Service ─────────────────────────────────────────────────────
 
-export const reservationService = {
-  /** GET /api/reservations?cookieId=... (guest) or GET /api/reservations (admin) */
-  async listForGuest(cookieId: string): Promise<Reservation[]> {
-    await wait(160)
-    const all = readLS<Reservation[]>(STORAGE_KEYS.reservations, seedReservations)
-    return all.filter((r) => r.cookieId === cookieId)
-  },
-
-  /** GET /api/reservations (admin only) */
-  async listAll(): Promise<Reservation[]> {
-    await wait(180)
-    return readLS<Reservation[]>(STORAGE_KEYS.reservations, seedReservations)
-  },
-
-  /** GET /api/tables/availability?date=...&partySize=... */
-  async getAvailability(date: string, partySize: number): Promise<Record<string, boolean>> {
-    await wait(200)
-    const all = readLS<Reservation[]>(STORAGE_KEYS.reservations, seedReservations)
-    // A table is unavailable if it has an Approved/Pending reservation on the same calendar day
-    const dayStr = date.slice(0, 10)
-    const takenIds = new Set(
-      all
-        .filter((r) => r.dateTime.slice(0, 10) === dayStr && (r.status === 'Approved' || r.status === 'Pending'))
-        .map((r) => r.tableId),
-    )
-    const result: Record<string, boolean> = {}
-    for (const t of floorTables) {
-      result[t.id] = !takenIds.has(t.id) && t.seats >= partySize
-    }
-    return result
-  },
-
-  /** POST /api/reservations */
-  async create(draft: ReservationDraft, cookieId: string): Promise<Reservation> {
-    await wait(220)
-    const all = readLS<Reservation[]>(STORAGE_KEYS.reservations, seedReservations)
-    const created: Reservation = {
-      id: `R-${Date.now()}`,
-      cookieId,
-      guestName: draft.guestName,
-      guestPhone: draft.guestPhone,
-      specialRequest: draft.specialRequest,
-      partySize: draft.partySize,
-      tableId: draft.tableId,
-      tableName: draft.tableName,
-      zone: draft.zone,
-      dateTime: draft.dateTime,
-      status: 'Pending',
-      createdAt: new Date().toISOString(),
-    }
-    writeLS(STORAGE_KEYS.reservations, [created, ...all])
-    return created
-  },
-
-  /** DELETE /api/reservations/:id (guest can cancel own, admin can delete) */
-  async cancel(id: string, cookieId: string): Promise<void> {
-    await wait(150)
-    const all = readLS<Reservation[]>(STORAGE_KEYS.reservations, seedReservations)
-    const updated = all.map((r) =>
-      r.id === id && r.cookieId === cookieId ? { ...r, status: 'Cancelled' as ReservationStatus } : r,
-    )
-    writeLS(STORAGE_KEYS.reservations, updated)
-  },
-
-  /** PATCH /api/reservations/:id/status (admin only) */
-  async updateStatus(id: string, status: ReservationStatus, adminNote?: string): Promise<void> {
-    await wait(150)
-    const all = readLS<Reservation[]>(STORAGE_KEYS.reservations, seedReservations)
-    const updated = all.map((r) =>
-      r.id === id ? { ...r, status, ...(adminNote !== undefined ? { adminNote } : {}) } : r,
-    )
-    writeLS(STORAGE_KEYS.reservations, updated)
-  },
-
-  /** PATCH /api/reservations/:id/note (admin only) */
-  async updateNote(id: string, adminNote?: string): Promise<void> {
-    await wait(120)
-    const all = readLS<Reservation[]>(STORAGE_KEYS.reservations, seedReservations)
-    const updated = all.map((r) =>
-      r.id === id ? { ...r, adminNote } : r,
-    )
-    writeLS(STORAGE_KEYS.reservations, updated)
-  },
-
-  /** DELETE /api/reservations/:id (admin only) */
-  async delete(id: string): Promise<void> {
-    await wait(130)
-    const all = readLS<Reservation[]>(STORAGE_KEYS.reservations, seedReservations)
-    writeLS(STORAGE_KEYS.reservations, all.filter((r) => r.id !== id))
-  },
-}
+export const reservationService = reservationApiService
 
 // ─── Ticket Service ──────────────────────────────────────────────────────────
 
