@@ -1,5 +1,0 @@
-registration
-logins
-makeing reservations
-list downloading
-endpoint authorization
