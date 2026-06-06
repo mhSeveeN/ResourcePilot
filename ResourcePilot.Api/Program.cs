@@ -3,13 +3,21 @@ using ResourcePilot.Api.Services;
 using ResourcePilot.Application.Common.Interfaces;
 using ResourcePilot.Infrastructure.Persistence;
 
-// Created Web_application constructor
-// Settings are applied from appsettings.json
+// Create WebApplication builder and configure services.
 var builder = WebApplication.CreateBuilder(args);
+var isTestEnvironment = builder.Environment.EnvironmentName == "Test";
 
-// DB connection (PostgreSQL)
-builder.Services.AddDbContext<ResourcePilotDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+// DB connection (PostgreSQL by default, in-memory for test environment)
+if (isTestEnvironment)
+{
+    builder.Services.AddDbContext<ResourcePilotDbContext>(options =>
+        options.UseInMemoryDatabase("TestDb"));
+}
+else
+{
+    builder.Services.AddDbContext<ResourcePilotDbContext>(options =>
+        options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+}
 
 // Reservation servis register
 // Scoped means that new instance is created for every http request    
@@ -47,7 +55,11 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ResourcePilotDbContext>();
     // All waiting migrations without doing 'by-hand'
-    db.Database.Migrate();
+    if (!isTestEnvironment)
+    {
+        db.Database.Migrate();
+    }
+    db.Database.EnsureCreated();
     DbSeeder.Seed(db);
 }
 
@@ -66,3 +78,5 @@ app.MapControllers();
 
 // App start
 app.Run();
+
+public partial class Program { }
