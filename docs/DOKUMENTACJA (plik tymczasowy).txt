@@ -1,7 +1,0 @@
-architecture describe
-function describe
-base model
-API describe
-tests describe
-diagram ence
-diagram reservation float
