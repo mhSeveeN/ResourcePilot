@@ -106,8 +106,8 @@ Frontend dostępny pod: `http://localhost:5173`
 
 ## Zespół
 
-| Imię i Nazwisko | Rola |
+| GitHub | Rola |
 |----------------|------|
-| [ Imię i Nazwisko ] | Frontend (React / TypeScript) |
-| [ Imię i Nazwisko ] | API & Domain (.NET / C#) |
-| [ Imię i Nazwisko ] | Baza danych, Integracja, Testy i Dokumentacja |
+| [ https://github.com/Nuvora ] | Frontend (React / TypeScript) |
+| [ https://github.com/bracai02 ] | API & Domain (.NET / C#) |
+| [ https://github.com/mhSeveeN ] | Baza danych, Integracja, Testy i Dokumentacja |
