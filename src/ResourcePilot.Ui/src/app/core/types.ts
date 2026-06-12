@@ -10,7 +10,7 @@ export type TicketCategory = 'General' | 'Complaint' | 'Special Request' | 'Feed
 
 export type Reservation = {
   id: string
-  /** Cookie-based guest identifier (no account needed) */
+
   cookieId: string
   guestName: string
   guestPhone: string
@@ -41,10 +41,8 @@ export type SupportTicket = {
   adminRepliedAt?: string
 }
 
-/** Minimal admin account stored in localStorage (mock — real impl uses JWT + bcrypt) */
 export type AdminAccount = {
   email: string
-  /** bcrypt hash placeholder — in mock we store plain, real API will hash */
   passwordHash: string
 }
 

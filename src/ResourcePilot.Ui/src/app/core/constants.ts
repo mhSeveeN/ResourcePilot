@@ -74,7 +74,6 @@ export const experiences = [
   },
 ]
 
-// Floor plan tables — positions in % of container
 export const floorTables = [
   { id: 'T1', name: "Chef's Table",  zone: 'Chef\'s Corner',  area: 'Indoor',  level: 'Main Floor',  shape: 'round', x: 15, y: 20, seats: 4, minParty: 2 },
   { id: 'T2', name: 'Terrace Table', zone: 'Private Terrace', area: 'Outdoor', level: 'Terrace',     shape: 'round', x: 55, y: 14, seats: 2, minParty: 1 },

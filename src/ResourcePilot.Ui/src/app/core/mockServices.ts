@@ -1,16 +1,3 @@
-/**
- * mockServices.ts
- * ---------------
- * All data lives in localStorage, keyed by STORAGE_KEYS.
- * Cookie-based guest identity: a UUID stored in a JS cookie (document.cookie).
- * Admin session: stored in sessionStorage so it clears on tab close.
- *
- * Prepared for real PostgreSQL + .NET API replacement:
- *   - Every function signature mirrors what the REST endpoints will accept/return.
- *   - Replace the body of each function with an `axios` / `fetch` call.
- */
-
-
 import { reservationApiService } from '../../shared/reservationApi'
 import { floorTables, ADMIN_EMAIL } from './constants'
 import type {

@@ -35,6 +35,17 @@ body::before {
     100% 100%;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: #fdfcf0;
+  -webkit-box-shadow: 0 0 0 1000px rgba(5, 5, 5, 0.98) inset;
+  box-shadow: 0 0 0 1000px rgba(5, 5, 5, 0.98) inset;
+  caret-color: #fdfcf0;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
 .gold-separator {
   height: 1px;
   transform: scaleY(0.5);
