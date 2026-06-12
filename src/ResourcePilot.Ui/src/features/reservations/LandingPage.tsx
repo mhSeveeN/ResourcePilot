@@ -120,9 +120,11 @@ export function LandingPage({ onBookTable }: { onBookTable: () => void }) {
               <div className="pointer-events-none absolute inset-0 ring-1 ring-[#C5A059]/10" />
             </div>
             {/* Floating accent card */}
-            <div className="absolute -bottom-6 -left-6 rounded-2xl border border-[#C5A059]/20 bg-[#080706]/90 p-5 backdrop-blur-md">
-              <p className="font-['Playfair_Display'] text-3xl text-[#C5A059]">8+</p>
-              <p className="mt-1 text-xs tracking-[0.15em] text-[#F8F4EC]/55">YEARS OF EXCELLENCE</p>
+            <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3 rounded-2xl border border-[#C5A059]/20 bg-[#080706]/90 p-4 backdrop-blur-md sm:-bottom-6 sm:-left-6 sm:right-auto sm:block sm:p-5">
+              <p className="shrink-0 font-['Playfair_Display'] text-3xl text-[#C5A059]">8+</p>
+              <p className="text-right text-[11px] tracking-[0.12em] text-[#F8F4EC]/55 sm:mt-1 sm:text-left sm:text-xs sm:tracking-[0.15em]">
+                YEARS OF EXCELLENCE
+              </p>
             </div>
           </motion.div>
         </div>

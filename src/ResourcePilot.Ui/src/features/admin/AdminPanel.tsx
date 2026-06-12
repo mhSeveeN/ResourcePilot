@@ -16,6 +16,17 @@ import { Textarea } from '../../shared/ui/Input'
 
 type AdminTab = 'overview' | 'reservations' | 'tickets'
 
+const ADMIN_TAB_CONFIG: Array<{
+  key: AdminTab
+  label: string
+  mobileLabel: string
+  icon: typeof BarChart3
+}> = [
+  { key: 'overview', label: 'Overview', mobileLabel: 'Overview', icon: BarChart3 },
+  { key: 'reservations', label: 'Reservations', mobileLabel: 'Bookings', icon: CalendarDays },
+  { key: 'tickets', label: 'Messages', mobileLabel: 'Messages', icon: Inbox },
+]
+
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })
 }
@@ -161,26 +172,42 @@ export function AdminPanel({
 
       <div className="mx-auto max-w-7xl px-4 py-8">
         {/* Tab navigation */}
-        <div className="mb-8 flex gap-2 overflow-x-auto">
-          {([
-            { key: 'overview' as AdminTab, label: 'Overview', icon: BarChart3 },
-            { key: 'reservations' as AdminTab, label: `Reservations (${reservations.length})`, icon: CalendarDays },
-            { key: 'tickets' as AdminTab, label: `Messages (${tickets.length})`, icon: Inbox },
-          ]).map(({ key, label, icon: Icon }) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => setTab(key)}
-              className={`flex shrink-0 items-center gap-2 rounded-xl px-4 py-2.5 text-sm transition-colors ${
-                tab === key
-                  ? 'bg-[#C5A059] text-[#080706] font-medium'
-                  : 'bg-white/6 text-[#F8F4EC]/60 hover:bg-white/10'
-              }`}
-            >
-              <Icon size={14} />
-              {label}
-            </button>
-          ))}
+        <div className="mb-8 grid grid-cols-3 gap-1.5 rounded-2xl border border-white/8 bg-white/4 p-1 sm:inline-flex sm:gap-2 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0">
+          {ADMIN_TAB_CONFIG.map(({ key, label, mobileLabel, icon: Icon }) => {
+            const count = key === 'reservations' ? reservations.length : key === 'tickets' ? tickets.length : null
+
+            return (
+              <button
+                key={key}
+                type="button"
+                onClick={() => setTab(key)}
+                className={`relative flex min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1.5 py-2.5 text-[11px] leading-none transition-colors sm:flex-row sm:gap-2 sm:px-4 sm:text-sm ${
+                  tab === key
+                    ? 'bg-[#C5A059] text-[#080706] font-medium'
+                    : 'bg-white/6 text-[#F8F4EC]/60 hover:bg-white/10'
+                }`}
+              >
+                <Icon size={14} className="shrink-0" />
+                <span className="max-w-full sm:min-w-0 sm:truncate">
+                  <span className="hidden sm:inline">
+                    {count === null ? label : `${label} (${count})`}
+                  </span>
+                  <span className="sm:hidden">{mobileLabel}</span>
+                </span>
+                {count !== null && (
+                  <span
+                    className={`absolute right-1.5 top-1.5 min-w-4 rounded-full px-1 py-0.5 text-[9px] sm:hidden ${
+                      tab === key
+                        ? 'bg-[#080706]/10 text-[#080706]'
+                        : 'bg-white/8 text-[#F8F4EC]/45'
+                    }`}
+                  >
+                    {count}
+                  </span>
+                )}
+              </button>
+            )
+          })}
         </div>
 
         {loading && (
