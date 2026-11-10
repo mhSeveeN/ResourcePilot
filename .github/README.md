@@ -108,6 +108,6 @@ Frontend dostępny pod: `http://localhost:5173`
 
 | GitHub | Rola |
 |----------------|------|
-| [ https://github.com/Nuvora ] | Frontend (React / TypeScript) |
+| [ https://github.com/runzenith ] | Frontend (React / TypeScript) |
 | [ https://github.com/bracai02 ] | API & Domain (.NET / C#) |
 | [ https://github.com/mhSeveeN ] | Baza danych, Integracja, Testy i Dokumentacja |
